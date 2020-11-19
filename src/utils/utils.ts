@@ -6,8 +6,8 @@ const store = new Store({
     configName: 'user-preferences',
     defaults: {
         autoHideMenu: false,
-        width: 800,
-        height: 600,
+        width: 1280,
+        height: 720,
         x: 0,
         y: 0
     }
