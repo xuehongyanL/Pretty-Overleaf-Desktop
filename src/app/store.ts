@@ -3,7 +3,7 @@ import path from 'path'
 import fs from 'fs'
 
 interface StorageOptionsDefaults {
-    autohideMenu: boolean,
+    autoHideMenu: boolean,
     width: number,
     height: number,
     x: number,
@@ -41,7 +41,7 @@ export default class Store {
 
 const isValidConfig = (input: any): input is StorageOptionsDefaults => {
     const schema: Record<keyof StorageOptionsDefaults, string> = {
-        autohideMenu: 'boolean',
+        autoHideMenu: 'boolean',
         width: 'number',
         height: 'number',
         x: 'number',

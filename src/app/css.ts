@@ -1,9 +1,10 @@
 import { BrowserWindow } from 'electron'
 import fs from 'fs'
 import path from 'path'
+import {isDarwinPlatform} from "../utils/utils";
 
 export const inject = (mw: BrowserWindow) => {
-    const platform = process.platform == 'darwin' ? 'macos' : null
+    const platform = isDarwinPlatform() ? 'macos' : null
     mw.webContents.insertCSS(
         fs.readFileSync(
             path.resolve(`${path.dirname(require.main!.filename)}/../assets/css/style.css`), 'utf8'

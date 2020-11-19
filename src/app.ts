@@ -3,15 +3,15 @@ import contextMenu from 'electron-context-menu'
 import fs from 'fs'
 import path from 'path'
 import MakeWindow from './app/mw'
-import { getMenu } from './utils/utils'
+import {getMenu, isDarwinPlatform} from './utils/utils'
 
 let window: BrowserWindow | null = null
 
-const initEvts = () => {
+const initEvents = () => {
     app.on('window-all-closed', () => {
         window?.webContents.session.flushStorageData()
         window = null
-        if (process.platform != 'darwin') {
+        if (!isDarwinPlatform()) {
             app.quit()
         }
     })
@@ -54,4 +54,4 @@ const initEvts = () => {
     })
 }
 
-initEvts()
+initEvents()

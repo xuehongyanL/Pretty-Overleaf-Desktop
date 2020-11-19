@@ -5,7 +5,7 @@ import {lookup as dnsLookup} from 'dns'
 const store = new Store({
     configName: 'user-preferences',
     defaults: {
-        autohideMenu: false,
+        autoHideMenu: false,
         width: 800,
         height: 600,
         x: 0,
@@ -24,8 +24,8 @@ export const setWindow = (x: number, y: number, width: number, height: number) =
     store.set('height', height)
 }
 
-export const shouldMenuAutohide = () => {
-    return store.get('autohideMenu')
+export const shouldMenuAutoHide = () => {
+    return store.get('autoHideMenu')
 }
 
 const menu = () => {
@@ -67,16 +67,16 @@ const menu = () => {
         }, {
             type: 'checkbox',
             label: 'Auto Hide Menubar',
-            checked: store.get('autohideMenu'),
+            checked: store.get('autoHideMenu'),
             click: (menuItem: MenuItem, bw: BrowserWindow | undefined, evt: KeyboardEvent) => {
-                const newHide = !store.get('autohideMenu')
+                const newHide = !store.get('autoHideMenu')
                 if (newHide) {
                     bw?.setAutoHideMenuBar(true)
                 } else {
                     bw?.setAutoHideMenuBar(false)
                     bw?.setMenuBarVisibility(true)
                 }
-                store.set('autohideMenu', newHide)
+                store.set('autoHideMenu', newHide)
                 menuItem.checked = newHide
             }
         }, {
@@ -184,5 +184,9 @@ export const lookup = (url: string) => {
 }
 
 export const getMenu = () => {
-    return process.platform === 'darwin' ? macOsMenu() : menu()
+    return isDarwinPlatform() ? macOsMenu() : menu()
+}
+
+export const isDarwinPlatform = () => {
+    return process.platform === "darwin"
 }

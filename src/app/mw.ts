@@ -1,25 +1,25 @@
 import { app, BrowserWindow, dialog, shell } from 'electron'
 import path from 'path'
 import * as Utils from '../utils/utils'
-import { lookup } from '../utils/utils'
+import {isDarwinPlatform, lookup} from '../utils/utils'
 import * as CSS from './css'
 import MakePDFWindow from './pdf'
 let pdfView: BrowserWindow | null = null
 
 export default () => {
     const winProps = Utils.getWindow()
-
+    isDarwinPlatform();
     const mw = new BrowserWindow({
-        title: 'Overleaf Desktop',
+        title: 'Pretty Overleaf Desktop',
         width: winProps.width,
         height: winProps.height,
         x: winProps.x,
         y: winProps.y,
-        frame: process.platform != 'darwin',
-        titleBarStyle: process.platform == 'darwin' ? 'hidden' : 'default',
-        transparent: process.platform == 'darwin',
+        frame: !isDarwinPlatform(),
+        titleBarStyle: isDarwinPlatform() ? 'hidden' : 'default',
+        transparent: isDarwinPlatform(),
         icon: path.resolve(`${path.dirname(require.main!.filename)}/../assets/icons/png/overleaf.png`),
-        show: process.platform != 'darwin',
+        show: !isDarwinPlatform(),
         webPreferences: {
             nodeIntegration: false,
             nativeWindowOpen: true,
@@ -27,7 +27,7 @@ export default () => {
         }
     })
 
-    if (Utils.shouldMenuAutohide()) {
+    if (Utils.shouldMenuAutoHide()) {
         mw.setAutoHideMenuBar(true)
         mw.setMenuBarVisibility(false)
     }
