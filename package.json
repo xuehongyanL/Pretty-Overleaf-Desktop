@@ -17,7 +17,7 @@
     "Overleaf",
     "LaTex"
   ],
-  "author": "oitsjustjose",
+  "author": "xuehongyanL",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^9.3.1",
