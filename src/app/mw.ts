@@ -78,6 +78,13 @@ export default () => {
         }
     })
 
+    mw.webContents.on('will-navigate', async (evt, url) => {
+        if (!url.includes('overleaf.com')) {
+            evt.preventDefault()
+            shell.openExternal(url)
+        }
+    })
+
     mw.on('close', () => {
         mw.webContents.session.flushStorageData()
         pdfView?.destroy()
