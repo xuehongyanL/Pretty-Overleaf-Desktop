@@ -1,3 +1,5 @@
+import {ipcRenderer} from 'electron'
+
 const bootstrapPDFButton = (ideToolbar: HTMLElement) => {
     const openBtn = document.createElement('a')
     openBtn.addEventListener('click', () => {
@@ -57,3 +59,5 @@ let loop = setInterval(() => {
         clearInterval(loop)
     }
 }, 200)
+
+ipcRenderer.send("send-to-main","test");

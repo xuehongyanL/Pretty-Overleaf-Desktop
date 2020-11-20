@@ -1,9 +1,10 @@
-import { app, BrowserWindow, dialog, shell } from 'electron'
+import {app, BrowserWindow, dialog, ipcMain, shell} from 'electron'
 import path from 'path'
 import * as Utils from '../utils/utils'
 import {isDarwinPlatform, lookup} from '../utils/utils'
 import * as CSS from './css'
 import MakePDFWindow from './pdf'
+
 let pdfView: BrowserWindow | null = null
 
 export default () => {
@@ -23,6 +24,7 @@ export default () => {
         webPreferences: {
             nodeIntegration: false,
             nativeWindowOpen: true,
+            enableRemoteModule: true,
             preload: path.join(__dirname, 'preload')
         }
     })
@@ -76,6 +78,10 @@ export default () => {
         } else {
             shell.openExternal(url)
         }
+    })
+
+    ipcMain.on("send-to-main",(event,args)=>{
+        console.log(args);
     })
 
     mw.webContents.on('will-navigate', async (evt, url) => {
