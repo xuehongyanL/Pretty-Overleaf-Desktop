@@ -1,4 +1,4 @@
-import { BrowserWindow, KeyboardEvent, MenuItem, MenuItemConstructorOptions } from 'electron'
+import { BrowserWindow, KeyboardEvent, MenuItem, MenuItemConstructorOptions, shell } from 'electron'
 import Store from '../app/store'
 import {lookup as dnsLookup} from 'dns'
 
@@ -89,6 +89,38 @@ const menu = () => {
         }, {
             role: 'forceReload'
         }]
+    }, {
+        label: 'About',
+        submenu: [{
+            label: '© 2020 Overleaf'
+        }, {
+            type: 'separator'
+        }, {
+            label: 'Privacy and Terms',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/legal')
+            }
+        }, {
+            label: 'Security',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/legal#Security')
+            }
+        }, {
+            label: 'Contact Us',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/contact')
+            }
+        }, {
+            label: 'About',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/about')
+            }
+        }, {
+            label: 'Blog',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/blog')
+            }
+        }]
     }]
 
     return tmpl
@@ -166,6 +198,38 @@ const macOsMenu = () => {
             role: 'close'
         }, {
             type: 'separator'
+        }]
+    }, {
+        label: 'About',
+        submenu: [{
+            label: '© 2020 Overleaf'
+        }, {
+            type: 'separator'
+        }, {
+            label: 'Privacy and Terms',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/legal')
+            }
+        }, {
+            label: 'Security',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/legal#Security')
+            }
+        }, {
+            label: 'Contact Us',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/contact')
+            }
+        }, {
+            label: 'About',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/about')
+            }
+        }, {
+            label: 'Blog',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/blog')
+            }
         }]
     }]
 
