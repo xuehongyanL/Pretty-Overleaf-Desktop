@@ -3,7 +3,8 @@ import contextMenu from 'electron-context-menu'
 import fs from 'fs'
 import path from 'path'
 import MakeWindow from './app/mw'
-import {getMenu, isDarwinPlatform} from './utils/utils'
+import {getMenu} from './app/Menu'
+import {isDarwinPlatform} from './utils/utils'
 
 let window: BrowserWindow | null = null
 
