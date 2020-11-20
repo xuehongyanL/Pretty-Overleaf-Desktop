@@ -1,6 +1,6 @@
-import {BrowserWindow, KeyboardEvent, MenuItem, MenuItemConstructorOptions, shell} from "electron";
-import {isDarwinPlatform} from "../utils/utils";
-import {store} from '../utils/utils'
+import { BrowserWindow, KeyboardEvent, MenuItem, MenuItemConstructorOptions, shell } from 'electron';
+import { isDarwinPlatform } from '../utils/utils';
+import { store } from '../utils/utils';
 
 const menu = () => {
     const tmpl: Array<MenuItemConstructorOptions> = [{
@@ -43,15 +43,15 @@ const menu = () => {
             label: 'Auto Hide Menubar',
             checked: store.get('autoHideMenu'),
             click: (menuItem: MenuItem, bw: BrowserWindow | undefined, evt: KeyboardEvent) => {
-                const newHide = !store.get('autoHideMenu')
+                const newHide = !store.get('autoHideMenu');
                 if (newHide) {
-                    bw?.setAutoHideMenuBar(true)
+                    bw?.setAutoHideMenuBar(true);
                 } else {
-                    bw?.setAutoHideMenuBar(false)
-                    bw?.setMenuBarVisibility(true)
+                    bw?.setAutoHideMenuBar(false);
+                    bw?.setMenuBarVisibility(true);
                 }
-                store.set('autoHideMenu', newHide)
-                menuItem.checked = newHide
+                store.set('autoHideMenu', newHide);
+                menuItem.checked = newHide;
             }
         }, {
             role: 'togglefullscreen'
@@ -72,33 +72,33 @@ const menu = () => {
         }, {
             label: 'Privacy and Terms',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/legal')
+                await shell.openExternal('https://www.overleaf.com/legal');
             }
         }, {
             label: 'Security',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/legal#Security')
+                await shell.openExternal('https://www.overleaf.com/legal#Security');
             }
         }, {
             label: 'Contact Us',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/contact')
+                await shell.openExternal('https://www.overleaf.com/contact');
             }
         }, {
             label: 'About',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/about')
+                await shell.openExternal('https://www.overleaf.com/about');
             }
         }, {
             label: 'Blog',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/blog')
+                await shell.openExternal('https://www.overleaf.com/blog');
             }
         }]
-    }]
+    }];
 
-    return tmpl
-}
+    return tmpl;
+};
 
 const macOsMenu = () => {
     const tmpl: Array<MenuItemConstructorOptions> = [{
@@ -182,34 +182,34 @@ const macOsMenu = () => {
         }, {
             label: 'Privacy and Terms',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/legal')
+                await shell.openExternal('https://www.overleaf.com/legal');
             }
         }, {
             label: 'Security',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/legal#Security')
+                await shell.openExternal('https://www.overleaf.com/legal#Security');
             }
         }, {
             label: 'Contact Us',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/contact')
+                await shell.openExternal('https://www.overleaf.com/contact');
             }
         }, {
             label: 'About',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/about')
+                await shell.openExternal('https://www.overleaf.com/about');
             }
         }, {
             label: 'Blog',
             click: async () => {
-                await shell.openExternal('https://www.overleaf.com/blog')
+                await shell.openExternal('https://www.overleaf.com/blog');
             }
         }]
-    }]
+    }];
 
-    return tmpl
-}
+    return tmpl;
+};
 
 export const getMenu = () => {
-    return isDarwinPlatform() ? macOsMenu() : menu()
-}
+    return isDarwinPlatform() ? macOsMenu() : menu();
+};

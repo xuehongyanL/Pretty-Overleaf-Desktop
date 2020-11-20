@@ -1,5 +1,5 @@
-import {Page} from "./Page";
-import {Project} from "./Project";
+import { Page } from './Page';
+import { Project } from './Project';
 
 interface PageFactoryInterface {
     $: any
