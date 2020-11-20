@@ -80,18 +80,15 @@ export default () => {
         }
     })
 
-    ipcMain.on("send-to-main", (event, args) => {
-        console.log(args);
-        setTimeout(() => {
-            mw.webContents.send("send-to-renderer", args)
-        }, 10000)
-    })
-
     mw.webContents.on('will-navigate', async (evt, url) => {
         if (!url.includes('overleaf.com')) {
             evt.preventDefault()
             shell.openExternal(url)
         }
+    })
+
+    ipcMain.on("send-to-main", (event, args) => {
+        console.log(args);
     })
 
     mw.on('close', () => {

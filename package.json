@@ -25,8 +25,10 @@
   },
   "dependencies": {
     "@types/electron": "^1.6.10",
+    "@types/jquery": "^3.5.4",
     "electron-context-menu": "^2.0.1",
     "electron-dl": "^3.0.1",
+    "jquery": "^3.5.1",
     "typescript": "^3.9.6"
   },
   "build": {

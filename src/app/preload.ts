@@ -60,8 +60,11 @@ let loop = setInterval(() => {
     }
 }, 200)
 
+window.onload = () => {
+    console.log(document)
+    let $ = require('jquery')
+}
+
 ipcRenderer.on("send-to-renderer", (event, args) => {
     console.log(args);
 })
-
-ipcRenderer.send("send-to-main", "test");
