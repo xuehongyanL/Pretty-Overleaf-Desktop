@@ -1,4 +1,6 @@
 import {ipcRenderer} from 'electron'
+import {PageFactory} from "../page/PageFactory"
+import {Page} from "../page/Page"
 
 const bootstrapPDFButton = (ideToolbar: HTMLElement) => {
     const openBtn = document.createElement('a')
@@ -60,9 +62,17 @@ let loop = setInterval(() => {
     }
 }, 200)
 
+let page: Page | null;
+
 window.onload = () => {
-    console.log(document)
     let $ = require('jquery')
+    let url = window.location.href
+    page = new PageFactory($).build(url)
+    if (page !== null) {
+        page.preprocess()
+    } else {
+        console.warn('No valid page found.')
+    }
 }
 
 ipcRenderer.on("send-to-renderer", (event, args) => {
