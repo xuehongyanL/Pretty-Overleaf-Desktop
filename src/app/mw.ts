@@ -9,7 +9,7 @@ let pdfView: BrowserWindow | null = null
 
 export default () => {
     const winProps = Utils.getWindow()
-    isDarwinPlatform();
+
     const mw = new BrowserWindow({
         title: 'Pretty Overleaf Desktop',
         width: winProps.width,
