@@ -60,4 +60,8 @@ let loop = setInterval(() => {
     }
 }, 200)
 
-ipcRenderer.send("send-to-main","test");
+ipcRenderer.on("send-to-renderer", (event, args) => {
+    console.log(args);
+})
+
+ipcRenderer.send("send-to-main", "test");
