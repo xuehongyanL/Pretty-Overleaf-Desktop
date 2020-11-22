@@ -2,8 +2,16 @@ import { BrowserWindow, KeyboardEvent, MenuItem, MenuItemConstructorOptions, she
 import { isDarwinPlatform } from '../utils/utils';
 import { store } from '../utils/utils';
 
-const menu = () => {
+const menu = (window: any) => {
     const tmpl: Array<MenuItemConstructorOptions> = [{
+        label: 'Projects',
+        submenu: [{
+            label: 'Projects',
+            click: async () => {
+                await window.loadURL('https://www.overleaf.com/project');
+            }
+        }]
+    }, {
         label: 'Edit',
         submenu: [{
             role: 'undo'
@@ -64,6 +72,19 @@ const menu = () => {
             role: 'forceReload'
         }]
     }, {
+        label: 'Help',
+        submenu: [{
+            label: 'Documentation',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/learn');
+            }
+        }, {
+            label: 'Contact Us',
+            click: async () => {
+                await window.webContents.send('send-to-renderer', 'ContactUs', null);
+            }
+        }]
+    }, {
         label: 'About',
         submenu: [{
             label: '© 2020 Overleaf'
@@ -100,7 +121,7 @@ const menu = () => {
     return tmpl;
 };
 
-const macOsMenu = () => {
+const macOsMenu = (window: any) => {
     const tmpl: Array<MenuItemConstructorOptions> = [{
         label: 'Gmail Desktop',
         submenu: [{
@@ -118,6 +139,14 @@ const macOsMenu = () => {
             type: 'separator'
         }, {
             role: 'quit'
+        }]
+    }, {
+        label: 'Projects',
+        submenu: [{
+            label: 'Projects',
+            click: async () => {
+                await window.loadURL('https://www.overleaf.com/project');
+            }
         }]
     }, {
         label: 'Edit',
@@ -174,6 +203,19 @@ const macOsMenu = () => {
             type: 'separator'
         }]
     }, {
+        label: 'Help',
+        submenu: [{
+            label: 'Documentation',
+            click: async () => {
+                await shell.openExternal('https://www.overleaf.com/learn');
+            }
+        }, {
+            label: 'Contact Us',
+            click: async () => {
+                await window.webContents.send('send-to-renderer', 'ContactUs', null);
+            }
+        }]
+    }, {
         label: 'About',
         submenu: [{
             label: '© 2020 Overleaf'
@@ -210,6 +252,6 @@ const macOsMenu = () => {
     return tmpl;
 };
 
-export const getMenu = () => {
-    return isDarwinPlatform() ? macOsMenu() : menu();
+export const getMenu = (window: any) => {
+    return isDarwinPlatform() ? macOsMenu(window) : menu(window);
 };

@@ -7,7 +7,17 @@ export class Project extends Page {
         $('body>.content.project-list-page').css('min-height', 'calc(100vh - 68px)');
     }
 
-    action(action: string) {
+    action(action: string, args: any) {
+        switch (action) {
+            case 'ContactUs':
+                this.actionContactUs();
+                return;
+            default:
+                console.warn('Unknown action');
+        }
+    }
 
+    actionContactUs() {
+        $('a[ng-click="contactUsModal()"]')?.trigger('click');
     }
 }

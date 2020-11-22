@@ -55,7 +55,7 @@ export default () => {
         }
     });
 
-    mw.loadURL('https://v2.overleaf.com/');
+    mw.loadURL('https://www.overleaf.com/');
 
     mw.webContents.on('dom-ready', () => {
         CSS.inject(mw);

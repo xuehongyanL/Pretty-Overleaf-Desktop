@@ -20,7 +20,7 @@ const initEvents = () => {
     app.on('activate', () => {
         if (!window) {
             window = MakeWindow();
-            Menu.setApplicationMenu(Menu.buildFromTemplate(getMenu()));
+            Menu.setApplicationMenu(Menu.buildFromTemplate(getMenu(window)));
         }
     });
 
@@ -39,7 +39,7 @@ const initEvents = () => {
         }
 
         window = MakeWindow();
-        Menu.setApplicationMenu(Menu.buildFromTemplate(getMenu()));
+        Menu.setApplicationMenu(Menu.buildFromTemplate(getMenu(window)));
     });
 
     app.on('quit', () => {

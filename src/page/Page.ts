@@ -1,7 +1,7 @@
 interface PageInterFace {
     $: any,
     preprocess: () => void,
-    action: (action: string) => void
+    action: (action: string, args: any) => void
 }
 
 export class Page implements PageInterFace {
@@ -11,7 +11,7 @@ export class Page implements PageInterFace {
         this.$ = $;
     }
 
-    action(action: string): void {
+    action(action: string, args: any): void {
     }
 
     preprocess(): void {
