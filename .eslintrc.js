@@ -214,7 +214,6 @@ module.exports = {
         'prefer-spread': 'off',
         'prefer-template': 'off',
         'quote-props': 'off',
-        'quotes': ['error', 'single'],
         'radix': 'off',
         'require-jsdoc': 'off',
         'require-yield': 'error',

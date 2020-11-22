@@ -32,6 +32,28 @@ const getProjectMenu: (window: any) => MenuItemConstructorOptions = (window) => 
     }]
 });
 
+const getAccountMenu: (window: any) => MenuItemConstructorOptions = (window) => ({
+    label: 'Account',
+    submenu: [{
+        label: 'Account Settings',
+        click: async () => {
+            await window.webContents.send('send-to-renderer', 'AccountSettings', null);
+        }
+    }, {
+        label: 'Subscription',
+        click: async () => {
+            await window.webContents.send('send-to-renderer', 'Subscription', null);
+        }
+    }, {
+        type: 'separator'
+    }, {
+        label: 'Log Out',
+        click: async () => {
+            await window.webContents.send('send-to-renderer', 'LogOut', null);
+        }
+    }]
+});
+
 const getEditMenu: () => MenuItemConstructorOptions = () => ({
     label: 'Edit',
     submenu: [{
@@ -179,6 +201,7 @@ const getMacOSWindowMenu: () => MenuItemConstructorOptions = () => ({
 const menu = (window: any) => {
     const tmpl: Array<MenuItemConstructorOptions> = [
         getProjectMenu(window),
+        getAccountMenu(window),
         getEditMenu(),
         getViewMenu(),
         getGoMenu(),
@@ -192,6 +215,7 @@ const macOsMenu = (window: any) => {
     const tmpl: Array<MenuItemConstructorOptions> = [
         getMacOSFirstMenu(),
         getProjectMenu(window),
+        getAccountMenu(window),
         getEditMenu(),
         getMacOSViewMenu(),
         getGoMenu(),
