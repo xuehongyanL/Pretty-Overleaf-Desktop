@@ -25,6 +25,12 @@ export class Project extends Page {
             case 'LogOut':
                 this.actionLogOut();
                 return;
+            case 'ToggleNavBar':
+                this.toggleNav();
+                return;
+            case 'ToggleFooter':
+                this.toggleFooter();
+                return;
             default:
                 console.warn('Unknown action');
         }
@@ -57,7 +63,7 @@ export class Project extends Page {
             this.footerShow = false;
         } else {
             footer.show();
-            this.navShow = true;
+            this.footerShow = true;
         }
         this.adjustMainHeight();
     }

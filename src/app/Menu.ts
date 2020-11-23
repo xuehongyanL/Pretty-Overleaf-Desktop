@@ -5,6 +5,8 @@ import { AccountSettingsAction } from '../action/AccountSettingsAction';
 import { SubscriptionAction } from '../action/SubscriptionAction';
 import { LogOutAction } from '../action/LogOutAction';
 import { ContactUsAction } from '../action/ContactUsAction';
+import { ToggleNavBarAction } from '../action/ToggleNavBarAction';
+import { ToggleFooterAction } from '../action/ToggleFooterAction';
 
 const getMacOSFirstMenu: () => MenuItemConstructorOptions = () => ({
     label: 'Gmail Desktop',
@@ -81,7 +83,7 @@ const getEditMenu: () => MenuItemConstructorOptions = () => ({
     }]
 });
 
-const getViewMenu: () => MenuItemConstructorOptions = () => ({
+const getViewMenu: (window: any) => MenuItemConstructorOptions = (window) => ({
     label: 'View',
     submenu: [{
         role: 'toggleDevTools'
@@ -111,11 +113,25 @@ const getViewMenu: () => MenuItemConstructorOptions = () => ({
             menuItem.checked = newHide;
         }
     }, {
+        type: 'separator'
+    }, {
+        label: 'Toggle Navigation',
+        click: async () => {
+            await window.webContents.send('send-to-renderer', new ToggleNavBarAction());
+        }
+    }, {
+        label: 'Toggle Footer',
+        click: async () => {
+            await window.webContents.send('send-to-renderer', new ToggleFooterAction());
+        }
+    }, {
+        type: 'separator'
+    }, {
         role: 'togglefullscreen'
     }]
 });
 
-const getMacOSViewMenu: () => MenuItemConstructorOptions = () => ({
+const getMacOSViewMenu: (window: any) => MenuItemConstructorOptions = (window) => ({
     label: 'View',
     submenu: [{
         role: 'toggleDevTools'
@@ -127,6 +143,18 @@ const getMacOSViewMenu: () => MenuItemConstructorOptions = () => ({
         role: 'zoomIn'
     }, {
         role: 'zoomOut'
+    }, {
+        type: 'separator'
+    }, {
+        label: 'Toggle Navigation',
+        click: async () => {
+            await window.webContents.send('send-to-renderer', new ToggleNavBarAction());
+        }
+    }, {
+        label: 'Toggle Footer',
+        click: async () => {
+            await window.webContents.send('send-to-renderer', new ToggleFooterAction());
+        }
     }, {
         type: 'separator'
     }, {
@@ -208,7 +236,7 @@ const menu = (window: any) => {
         getProjectMenu(window),
         getAccountMenu(window),
         getEditMenu(),
-        getViewMenu(),
+        getViewMenu(window),
         getGoMenu(),
         getHelpMenu(window),
         getAboutMenu()
@@ -222,7 +250,7 @@ const macOsMenu = (window: any) => {
         getProjectMenu(window),
         getAccountMenu(window),
         getEditMenu(),
-        getMacOSViewMenu(),
+        getMacOSViewMenu(window),
         getGoMenu(),
         getMacOSWindowMenu(),
         getHelpMenu(window),
