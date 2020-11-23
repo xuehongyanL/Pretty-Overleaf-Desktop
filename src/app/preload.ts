@@ -75,6 +75,6 @@ window.onload = () => {
     }
 };
 
-ipcRenderer.on('send-to-renderer', (event, action, args) => {
-    page?.action(action, args);
+ipcRenderer.on('send-to-renderer', (event, action) => {
+    page?.action(action);
 });

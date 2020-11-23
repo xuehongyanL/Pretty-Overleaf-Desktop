@@ -1,4 +1,5 @@
 import { Page } from './Page';
+import { Action } from '../action/Action';
 
 export class Project extends Page {
     navShow: boolean = true
@@ -10,8 +11,8 @@ export class Project extends Page {
         $('body>.content.project-list-page').css('min-height', 'calc(100vh)');
     }
 
-    action(action: string, args: any) {
-        switch (action) {
+    action(action: Action) {
+        switch (action.type) {
             case 'ContactUs':
                 this.actionContactUs();
                 return;

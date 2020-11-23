@@ -1,6 +1,10 @@
 import { BrowserWindow, KeyboardEvent, MenuItem, MenuItemConstructorOptions, shell } from 'electron';
 import { isDarwinPlatform } from '../utils/utils';
 import { store } from '../utils/utils';
+import { AccountSettingsAction } from '../action/AccountSettingsAction';
+import { SubscriptionAction } from '../action/SubscriptionAction';
+import { LogOutAction } from '../action/LogOutAction';
+import { ContactUsAction } from '../action/ContactUsAction';
 
 const getMacOSFirstMenu: () => MenuItemConstructorOptions = () => ({
     label: 'Gmail Desktop',
@@ -37,19 +41,19 @@ const getAccountMenu: (window: any) => MenuItemConstructorOptions = (window) => 
     submenu: [{
         label: 'Account Settings',
         click: async () => {
-            await window.webContents.send('send-to-renderer', 'AccountSettings', null);
+            await window.webContents.send('send-to-renderer', new AccountSettingsAction());
         }
     }, {
         label: 'Subscription',
         click: async () => {
-            await window.webContents.send('send-to-renderer', 'Subscription', null);
+            await window.webContents.send('send-to-renderer', new SubscriptionAction());
         }
     }, {
         type: 'separator'
     }, {
         label: 'Log Out',
         click: async () => {
-            await window.webContents.send('send-to-renderer', 'LogOut', null);
+            await window.webContents.send('send-to-renderer', new LogOutAction());
         }
     }]
 });
@@ -148,7 +152,7 @@ const getHelpMenu: (window: any) => MenuItemConstructorOptions = (window) => ({
     }, {
         label: 'Contact Us',
         click: async () => {
-            await window.webContents.send('send-to-renderer', 'ContactUs', null);
+            await window.webContents.send('send-to-renderer', new ContactUsAction());
         }
     }]
 });
