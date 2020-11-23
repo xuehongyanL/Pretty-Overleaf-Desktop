@@ -109,7 +109,8 @@ const getViewMenu: () => MenuItemConstructorOptions = () => ({
             }
             store.set('autoHideMenu', newHide);
             menuItem.checked = newHide;
-        } }, {
+        }
+    }, {
         role: 'togglefullscreen'
     }]
 });
