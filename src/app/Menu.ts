@@ -171,27 +171,13 @@ const getGoMenu: () => MenuItemConstructorOptions = () => ({
     }]
 });
 
-const getHelpMenu: (window: any) => MenuItemConstructorOptions = (window) => ({
-    label: 'Help',
+const getAboutMenu: (window: any) => MenuItemConstructorOptions = (window) => ({
+    label: 'About',
     submenu: [{
         label: 'Documentation',
         click: async () => {
             await shell.openExternal('https://www.overleaf.com/learn');
         }
-    }, {
-        label: 'Contact Us',
-        click: async () => {
-            await window.webContents.send('send-to-renderer', new ContactUsAction());
-        }
-    }]
-});
-
-const getAboutMenu: () => MenuItemConstructorOptions = () => ({
-    label: 'About',
-    submenu: [{
-        label: '© 2020 Overleaf'
-    }, {
-        type: 'separator'
     }, {
         label: 'Privacy and Terms',
         click: async () => {
@@ -203,7 +189,12 @@ const getAboutMenu: () => MenuItemConstructorOptions = () => ({
             await shell.openExternal('https://www.overleaf.com/legal#Security');
         }
     }, {
-        label: 'Contact Us',
+        label: 'Contact Us (In Page)',
+        click: async () => {
+            await window.webContents.send('send-to-renderer', new ContactUsAction());
+        }
+    }, {
+        label: 'Contact Us (External)',
         click: async () => {
             await shell.openExternal('https://www.overleaf.com/contact');
         }
@@ -217,6 +208,10 @@ const getAboutMenu: () => MenuItemConstructorOptions = () => ({
         click: async () => {
             await shell.openExternal('https://www.overleaf.com/blog');
         }
+    }, {
+        type: 'separator'
+    }, {
+        label: '© 2020 Overleaf'
     }]
 });
 
@@ -238,8 +233,7 @@ const menu = (window: any) => {
         getEditMenu(),
         getViewMenu(window),
         getGoMenu(),
-        getHelpMenu(window),
-        getAboutMenu()
+        getAboutMenu(window)
     ];
     return tmpl;
 };
@@ -253,8 +247,7 @@ const macOsMenu = (window: any) => {
         getMacOSViewMenu(window),
         getGoMenu(),
         getMacOSWindowMenu(),
-        getHelpMenu(window),
-        getAboutMenu()
+        getAboutMenu(window)
     ];
     return tmpl;
 };
