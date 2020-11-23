@@ -1,6 +1,6 @@
 {
   "name": "overleaf",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A dedicated, **unofficial** desktop application for Overleaf, the online LaTeX editor. Written in electron and built in electron-builder.",
   "main": "./js/app.js",
   "scripts": {
@@ -20,13 +20,18 @@
   "author": "xuehongyanL",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
     "electron": "^9.3.1",
-    "electron-builder": "^22.7.0"
+    "electron-builder": "^22.7.0",
+    "eslint": "^7.13.0"
   },
   "dependencies": {
     "@types/electron": "^1.6.10",
+    "@types/jquery": "^3.5.4",
     "electron-context-menu": "^2.0.1",
     "electron-dl": "^3.0.1",
+    "jquery": "^3.5.1",
     "typescript": "^3.9.6"
   },
   "build": {
